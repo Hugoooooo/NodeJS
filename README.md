@@ -47,18 +47,18 @@
 - 在 Node 中如果想要進行文件操作，就必須引入fs這個核心模塊
 - 所使用的文件操作的 API 都是異步 
 - readFile 的第二個參數是可選的，傳入utf8 就是告訴她把讀取到的文件直接轉成utf8編碼
-``` javascript=
+``` javascript =
     fs.readFile('./db.json','utf8',(err,data)=>{
     })
 ```
 
 ## HTTP 服務
 1. 加載 http 核心模塊
-``` javascript=
+``` javascript =
 var http = require('http') 
 ```
 2. 使用 http.createServer() 創建一個Web服務器
-``` javascript=
+``` javascript =
 var server = http.createServer() 
 ```
 3. 服務器要做啥?
@@ -87,7 +87,7 @@ var server = http.createServer()
         >   1.不同資源對應的Content-Type 是不一樣的
         >   2.圖片不需要指定編碼
         >   3.一般只有字符數據才需要指定編碼
-``` javascript=
+``` javascript =
 server.on('request', function (request,response) {
     console.log('收到客戶端!請求路徑 :'+ request.url);
 
@@ -101,7 +101,7 @@ server.on('request', function (request,response) {
 4. 綁定端口號，啟動服務器 (監聽Port)  
     * Ctrl+c = 關閉服務器
     
-``` javascript=
+``` javascript =
 server.listen(3000, function () {
     console.log('服務器啟動成功，可以通過 127.0.0.1:3000 來進行訪問');
 });
@@ -113,7 +113,7 @@ server.listen(3000, function () {
 ## 核心模塊
 * Node 為Javascript 提供服務器級別的API，這些AP絕大多數被包裝到一個具名的模塊中，例如文件操作的``` fs```核心模塊，http服務建構的```http```模塊等等...
 
-``` Javascript=
+``` javascript =
 var fs = require('fs');
 var http = require('http')
 ```
@@ -186,7 +186,7 @@ var http = require('http')
 - 使用 exports 街口對像來導出模塊中的成員
 #### 2.1 加載 `require`
 語法
-``` javascript=
+``` javascript =
 var 變量名稱 = require('模塊')
 ```
 作用
@@ -196,7 +196,7 @@ var 變量名稱 = require('模塊')
 - Node 中視模塊作用域，默認文件中所有的程有只有在當前文件模塊有效
 - 對於希望可以被其他模塊訪問的成員，須將公開的成員都掛載到 `exports`皆可對像中就可以了
     + 導出多個成員 (必須在對象中)
-    ``` javascript=
+    ``` javascript =
         exports.a = 123;
         exports.b = 'hello'
         exports.c = function(){
@@ -204,7 +204,7 @@ var 變量名稱 = require('模塊')
         }
     ```    
     + 導出單個成員 
-    ``` javascript=
+    ``` javascript =
         module.exports = 'hello'
 
         module.exports = function (x, y) {
@@ -223,7 +223,7 @@ var 變量名稱 = require('模塊')
 - 在 Node 中，每個模塊內部都有一個自己的 module 對象
 - 該 module 對像中，有一個成員叫：exports 也是一個對象
 - 就是說如果你需要對外導出成員，只需要把導出的成員掛載到 module.exports 中
-    ``` javascript=
+    ``` javascript =
     var module = {
       exports: {
         foo: 'bar',
@@ -244,7 +244,7 @@ var 變量名稱 = require('模塊')
     + .js 後綴名可以省略
 - 核心模塊
     +  核心模塊文件已經被編譯到了二進製文件中了，我們只需要按照名字來加載就可以了
-    ``` javascript=
+    ``` javascript =
      require('fs')
      require('http')
     ```
@@ -320,13 +320,13 @@ var 變量名稱 = require('模塊')
     + **data/a.txt** 相對於當前目錄
     + **/data/a.txt** 絕對路徑，當前文件模塊所處磁碟機的根目錄
     + **c:/xx/xx/** 絕對路徑    
-     ``` javascript=
+     ``` javascript =
     fs.readFile('./data/a.txt',function(err,data){
     })
     ```
 - 模塊操作路徑
     + 模塊加載的路徑中相對路徑不能省略
-     ``` javascript=
+     ``` javascript =
         //如果這裡省略了，則也是磁碟根目錄
         require('data/foo.js')
         //相對路徑
@@ -353,7 +353,7 @@ nodemon app.js
 #### 1.1 安裝
 `npm install --save express`
 #### 1.2 Hello World
-``` javascript=
+``` javascript =
 const express = require('express');
 const app = express();
 
@@ -367,13 +367,13 @@ app.listen(3000,()=>console.log('Service runnong!'));
     + 請求路徑
     + 請求處理函數
 - **GET**
-``` javascript=
+``` javascript =
 app.get('/',function(req,res){
     res.send('Hello World!');
 })
 ```
 - **POST**
-``` javascript=
+``` javascript =
 app.post('/',function(req,res){
     res.send('Hello World!');
 })
@@ -381,7 +381,7 @@ app.post('/',function(req,res){
 #### 1.4 靜態服務
 - 公開指定目錄
     + 只要這樣做了，就可以直接通過/public/xx的方式訪問 public 目錄中的所有資源
-``` javascript=
+``` javascript =
 app.use('自訂Url目錄',express.static('實際目錄'))
 
 // public 資源
@@ -405,14 +405,14 @@ npm install --save express-art-tepmplate
 ```
 #### 2.2 配置
 - 第一個參數表示，渲染以 .html 結尾文件的時候
-``` javascript=
+``` javascript =
 app.engin('html',require('express-art-template'))
 ```
 #### 2.3 使用
 - Express 為 Response 相應對象提供了一個方法: render
 - render 方法默認是不可以使用，但是如果配置了模板引擎就可以使用了
 - **res.render('html模板名',{模板數據})**
-``` javascript=
+``` javascript =
 app.get('/',function(res,rsp){
 //express 默認會去抓項目中的 views目錄找 idnex.html
     res.render('index.html',{
@@ -428,7 +428,7 @@ app.set('views','public')
 ```
 ### 3 Express 中獲取表單GET請求參數
 - Express 內置了一個API,可以直接通過`req.query`來獲取
-``` javascript=
+``` javascript =
 req.query
 ```
 ### 4 Express 中獲取表單POST請求參數
@@ -438,7 +438,7 @@ req.query
 npm install --save body-parser
 ```
 #### 4.2 配置
-``` javascript=
+``` javascript =
 var express = require('express')
 var bodyparser = require('body-parser')
 var app =exporess()
@@ -448,7 +448,7 @@ app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
 ```
 #### 4.3 使用
-``` javascript=
+``` javascript =
 app.use(function (req,res){
     res.send(cres.body)
 })
@@ -494,7 +494,7 @@ app.use(function (req,res){
     > ex: users,product
 - 文檔 - 一個集合中可以有多個文檔
     > ex: {name:'Hugo',age: 18}.... 
-    ``` javascript= 
+    ``` javascript = 
     {
         google:{
             users: [
@@ -525,7 +525,7 @@ app.use(function (req,res){
     - `db.集合名稱.find()`
         > 顯示該集合所有資料    
 - Hello world
-``` javascript=
+``` javascript =
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
@@ -542,7 +542,7 @@ kitty.save((err) => {
 ```
 
 - **新增**
-``` javascript=
+``` javascript =
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -587,7 +587,7 @@ admin.save((err,ret)=>{
 ```
 
 - **查詢**
-``` javascript=
+``` javascript =
 // 查詢所有資料
 User.find((err, ret) => {
     if (err) {
@@ -622,15 +622,15 @@ User.findOne(
 
 - **刪除**
     + 根據條件刪除一個
-    ``` javascript=
+    ``` javascript =
     Model.findOneAndRemove(conditions,[options],[callback])
     ```
     + 根據ID刪除個
-    ``` javascript=
+    ``` javascript =
     Model.findByIdAndRemove(id,[options],[callback])
     ```
     + Example
-    ``` javascript=
+    ``` javascript =
     // 刪除所有資料
     User.remove((err, ret) => {
         if (err) {
@@ -654,15 +654,15 @@ User.findOne(
     ```
 - **更新**
     + 根據條件更新所有
-    ``` javascript=
+    ``` javascript =
     Model.update(conditions,[options],[callback])
     ```
     + 根據指定條件更新一個
-    ``` javascript=
+    ``` javascript =
     Model.findOneAndUpdate([conditions],[update],[options],[callback])
     ```
     + 根據ID更新一個
-    ``` javascript=
+    ``` javascript =
     // 刪除所有資料
     User.findByIdAndUpdate(
         '5c137fac9dcb744c1ccf134a'
@@ -694,7 +694,7 @@ User.findOne(
 - 回調地獄
 
     > 為了確保非同步方法的執行順序，所以會將方法塞進方法內，這種方式簡稱**回調地獄**
-    ``` javascript=
+    ``` javascript =
     var fs = require('fs');
 
     fs.readFile('./a.txt', 'utf8', (err, data) => {
@@ -720,7 +720,7 @@ User.findOne(
 
 - Promise 用法
 
-    ``` javascript=
+    ``` javascript =
     var fs = require('fs')
 
     var p1 = new Promise(function (resolve, reject) {
@@ -777,7 +777,7 @@ User.findOne(
     ![](https://i.imgur.com/GrD2RK2.png)
 
  - 封裝 Promise版本
- ``` javascript=
+ ``` javascript =
  var fs = require('fs')
 
 function pReadFile(path) {
@@ -814,12 +814,12 @@ pReadFile('./a.txt')
     + 在響應頭中通過 Location 告訴客戶端在哪重新定向
         `setHeader`
     + Example
-        ``` javascript=
+        ``` javascript =
         res.statusCode =302;
         res.setHeader('Location','/')
         ```
 - 如何設定Express 404頁面
-    ``` javascript=
+    ``` javascript =
     //所有未處理的請求路徑都會跑到這裡
     app.use((req,res)=>{
         res.send('404444444444444444444');
