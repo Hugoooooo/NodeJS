@@ -1,0 +1,46 @@
+{{extend '../_layouts/home.html'}}
+
+{{block 'title'}}{{'Hugo-Blog'}}{{/block}}
+
+{{block 'body'}}
+<section class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <form id="post_form">
+        <div class="form-group">
+          <label for="exampleInputEmail1">標題</label>
+          <input type="text" class="form-control" name="title" placeholder="Title">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">内容</label>
+          <textarea class="form-control" rows="3" name="content"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+{{/block}}
+
+{{block 'script'}}
+<script>
+    $('#post_form').on('submit', function (e) {
+      e.preventDefault();
+      var formData = $(this).serialize();
+      $.ajax({
+        url: '/topic/new',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+          var err_code = data.err_code
+          if (err_code === 0) {
+            window.location.href = '/'
+          } else if (err_code === 500) {
+            window.alert('服務器忙，請稍後重試！');
+          }
+        }
+      })
+    })
+  </script>
+{{/block}}

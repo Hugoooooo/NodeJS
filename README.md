@@ -42,7 +42,7 @@
     * 絕大部分的Jacascript相關的套件都存放在 npm 上，方便開發人員使用下載
     * ``` npm install jquery  ```
 
-## File-Stream
+## 1. File-Stream
 - fs 是 file-system的簡寫，就是文件系統的意思
 - 在 Node 中如果想要進行文件操作，就必須引入fs這個核心模塊
 - 所使用的文件操作的 API 都是異步 
@@ -52,16 +52,16 @@
     })
 ```
 
-## HTTP 服務
-1. 加載 http 核心模塊
+## 2. HTTP 服務
+2.1. 加載 http 核心模塊
 ``` javascript=
 var http = require('http') 
 ```
-2. 使用 http.createServer() 創建一個Web服務器
+2.2. 使用 http.createServer() 創建一個Web服務器
 ``` javascript=
 var server = http.createServer() 
 ```
-3. 服務器要做啥?
+2.3. 服務器要做啥?
     * 提供服務 (數據的服務)
     * 發請求
     * 接收請求
@@ -98,7 +98,7 @@ server.on('request', function (request,response) {
     //response.end('apple');
 })
 ```
-4. 綁定端口號，啟動服務器 (監聽Port)  
+2.4. 綁定端口號，啟動服務器 (監聽Port)  
     * Ctrl+c = 關閉服務器
     
 ``` javascript=
@@ -110,7 +110,7 @@ server.listen(3000, function () {
 
 ![](https://i.imgur.com/2bGxB3w.png)
 
-## 核心模塊
+## 3. 核心模塊
 * Node 為Javascript 提供服務器級別的API，這些AP絕大多數被包裝到一個具名的模塊中，例如文件操作的``` fs```核心模塊，http服務建構的```http```模塊等等...
 
 ``` Javascript=
@@ -135,7 +135,7 @@ var http = require('http')
             > * exports默認是一個空對象
 
 
-## 服務端渲染
+## 4. 服務端渲染
 - 服務端渲染介紹
     + 說白了就是在服務端使用模板引擎
     + 模板引擎最早誕生於服務端，後來才發展到了前端
@@ -158,7 +158,7 @@ var http = require('http')
       等帶有 src 或者 href（link） 屬性標籤（具有外鏈的資源）的時候，**瀏覽器會自動對這些資源發起新的請求**。
       
 
-## Node 中的模塊系統
+## 5. Node 中的模塊系統
 使用 Node 編寫應用程式主要就是在使用
 - EcmaScript 語言
     + 和瀏覽器不一樣，在 Node 中沒有BOM、DOM
@@ -174,17 +174,17 @@ var http = require('http')
 - 自製模塊  
     + 自己創建的文件
 
-### 1. 什麼是模塊化
+### 5.1. 什麼是模塊化
 - 文件作用域
 - 通信規則
     + 加載 require 
     + 導出 
-### 2. CommonJS模塊規範
+### 5.2. CommonJS模塊規範
 在 Node 中的Javascript還有一個很重要的概念，模塊系統
 - 模塊作用域
 - 使用 require 方法用來加載模塊
 - 使用 exports 街口對像來導出模塊中的成員
-#### 2.1 加載 `require`
+#### 5.2.1 加載 `require`
 語法
 ``` javascript=
 var 變量名稱 = require('模塊')
@@ -192,7 +192,7 @@ var 變量名稱 = require('模塊')
 作用
 - 執行倍加載模塊中的代碼
 - 得到倍加載模塊中的export導出街口對象
-#### 2.2 導出 `exports`
+#### 5.2.2 導出 `exports`
 - Node 中視模塊作用域，默認文件中所有的程有只有在當前文件模塊有效
 - 對於希望可以被其他模塊訪問的成員，須將公開的成員都掛載到 `exports`皆可對像中就可以了
     + 導出多個成員 (必須在對象中)
@@ -219,7 +219,7 @@ var 變量名稱 = require('模塊')
         }
     ```
     
-##### 2.2.1 Exports原理
+##### 5.2.2.1 Exports原理
 - 在 Node 中，每個模塊內部都有一個自己的 module 對象
 - 該 module 對像中，有一個成員叫：exports 也是一個對象
 - 就是說如果你需要對外導出成員，只需要把導出的成員掛載到 module.exports 中
@@ -235,7 +235,7 @@ var 變量名稱 = require('模塊')
     var exports = module.exports
     ```
 
-### 模塊標識
+### 5.3 模塊標識
 - 非路徑形式的模塊標識
 - 路徑形式的模塊
     + ./ 當前目錄，不可省略
@@ -263,11 +263,11 @@ var 變量名稱 = require('模塊')
     + 意：我們一個項目有且只有一個 node_modules，放在項目根目錄中，這樣的話項目中所有的子目錄中的代碼都可以加載到第三方包不會出現有多個 node_modules
 
 
-### npm
+### 5.4 npm
 > node package manager
-#### npm 網站
+#### 5.4.1 npm 網站
 >https://www.npmjs.com/
-#### npm 命令工具
+#### 5.4.2 npm 命令工具
 - npm 有版本這個概念
     ``` cmd=
     npm --version
@@ -297,7 +297,7 @@ var 變量名稱 = require('模塊')
          + 查看指定命令的使用幫助     
 
 
-### package.json
+### 5.5 package.json
 - 建議每一個專案都需要一個`package.json`文件 (包描述文件，就像產品的說明書一樣)
 - 文件可以透過 `npm init` 的方式自動初始化出來
 - 檔案內的`dependencies`選項，可以用來幫助我們保存且一目了然第三方包的依賴訊息
@@ -307,14 +307,14 @@ var 變量名稱 = require('模塊')
     mpm i --save art-template
     ```
 - 如果`node_modules`刪除了也不用擔心，我們只需要`npm install`就會自動把`package.json`中的`dependencies`中所有的依賴項都載回來
-- **package.json 和 package-lock.json差異**
+- **package.json 和 package- .json差異**
     + npm5 以前是不會有 `package-lock.json` 這個文件
     + npm5 以後才加入這個文件，當你安裝包的時候，npm會生成或更新`package-lock.json`
     + `package-lock.json`這個文件會保存`node_modules`中所有包的訊息
         + 重新`npm install`的時候速度就可以提升
     + `package-lock.json`這個文件的另外一個公用就是用來鎖定版本號，防止自動升級版本
 
-## 文件操作路徑和模塊路徑
+## 6. 文件操作路徑和模塊路徑
 - 文件操作的相對路徑
     + **./data/a.txt** 相對於當前目錄
     + **data/a.txt** 相對於當前目錄
@@ -333,7 +333,7 @@ var 變量名稱 = require('模塊')
         require('./data/foo.js')
     ```
 
-## 修改完帶碼自動重啟
+## 7. 修改完帶碼自動重啟
 - 這裡可以使用一個第三方命名行工具 `nodemon` 來解決頻繁修改代碼重啟服務器的問題
 - `nodemon`是一個基於Node.js開發的一個第三方命令行工具，我們使用的時候需要獨立安裝
 ``` cmd=
@@ -346,13 +346,47 @@ node app.js
 # 使用 nodemon
 nodemon app.js
 ```
+## 8. path 路徑操作模塊
+> [參考文檔](https://nodejs.org/dist/latest-v10.x/docs/api/path.html)
+- path.basename
+    + 獲取一個路徑的文件名(默認不包含副檔名)
+- path.dirname
+    + 獲取一個路徑中的目錄部分
+- path.extname
+    + 獲取一個路徑中的副檔名
+- path.parse
+    + 把一個路徑轉為對象
+        + root 根目錄
+        + dir 目錄
+        + base 包含副檔名的文件名
+        + ext 後綴名
+        + name 不包含副檔名的文件名
+- path.join
+    + 需要進行路徑合併時，推薦使用
+- path.IsAbsolute
+    + 判斷一個路徑是否為絕對路徑  
 
-## Express
 
-### 1. 基本
-#### 1.1 安裝
+## 9. Node 中的其他成員
+
+在每個模塊中，除了`require`、`exports`等模塊相關API之外，還有兩個特殊的成員
+-  `__dirname`: **動態獲取**可以用來獲取當前文件模塊所屬目錄的絕對路徑
+-  `__filename`: **動態獲取**可以用來獲取當前文件的絕對路徑
+-  `__dirname`和`__filename`是不受執行node命令所屬路徑影響
+
+**文件相對路徑中，相對路徑設計的就是相對於執行 node 命令所處的路徑**
+
+在文件操作中，使用相對路徑是不可靠的，因為在Node中文件操作的路徑是被設計為相對於執行 node 命令所處的路徑
+所以為了解決這個問題，須將相對路徑統一改成絕對路徑。
+我們可以使用`__dirname`和`__filename`來幫我們解決這個問題。
+> 補充: 模塊中的路徑和這裡的路徑沒關係，並不受node 命令所處的路徑影響
+
+## 10. Express
+
+### 10.1. 基本
+#### 10.1.1 安裝
 `npm install --save express`
-#### 1.2 Hello World
+#### 10.1.2 Hello World
 ``` javascript=
 const express = require('express');
 const app = express();
@@ -361,7 +395,7 @@ app.get('/',(req,res) => res.send('Hello World!'));
 
 app.listen(3000,()=>console.log('Service runnong!'));
 ```
-#### 1.3 基本路由
+#### 10.1.3 基本路由
 - 路由器
     + 請求方法
     + 請求路徑
@@ -378,7 +412,7 @@ app.post('/',function(req,res){
     res.send('Hello World!');
 })
 ```
-#### 1.4 靜態服務
+#### 10.1.4 靜態服務
 - 公開指定目錄
     + 只要這樣做了，就可以直接通過/public/xx的方式訪問 public 目錄中的所有資源
 ``` javascript=
@@ -397,18 +431,18 @@ app.use('/pulic',express.static('public'))
 app.use('/static',express.static('static'))
 ```
 
-### 2 Express 中配置使用`art-template`模板引擎
-#### 2.1 安裝
+### 10.2 Express 中配置使用`art-template`模板引擎
+#### 10.2.1 安裝
 ``` cmd=
 npm install --save art-template
 npm install --save express-art-tepmplate
 ```
-#### 2.2 配置
+#### 10.2.2 配置
 - 第一個參數表示，渲染以 .html 結尾文件的時候
 ``` javascript=
 app.engin('html',require('express-art-template'))
 ```
-#### 2.3 使用
+#### 10.2.3 使用
 - Express 為 Response 相應對象提供了一個方法: render
 - render 方法默認是不可以使用，但是如果配置了模板引擎就可以使用了
 - **res.render('html模板名',{模板數據})**
@@ -426,18 +460,18 @@ app.get('/',function(res,rsp){
 //更改路徑
 app.set('views','public')
 ```
-### 3 Express 中獲取表單GET請求參數
+### 10.3 Express 中獲取表單GET請求參數
 - Express 內置了一個API,可以直接通過`req.query`來獲取
 ``` javascript=
 req.query
 ```
-### 4 Express 中獲取表單POST請求參數
+### 10.4 Express 中獲取表單POST請求參數
 - Express 內置了一個API,這裡使用第三方套件`body-parser`
-#### 4.1 安裝
+#### 10.4.1 安裝
 ``` cmd=
 npm install --save body-parser
 ```
-#### 4.2 配置
+#### 10.4.2 配置
 ``` javascript=
 var express = require('express')
 var bodyparser = require('body-parser')
@@ -447,19 +481,19 @@ var app =exporess()
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
 ```
-#### 4.3 使用
+#### 10.4.3 使用
 ``` javascript=
 app.use(function (req,res){
     res.send(cres.body)
 })
 ```
 
-## MongoDB
+## 11. MongoDB
 - 官網: https://mongoosejs.com/
 - 官方指南: https://mongoosejs.com/docs/guide.html
 - 官方API文檔: https://mongoosejs.com/docs/api.html
 
-###  1. 啟動和關閉數據庫
+###  11.1. 啟動和關閉數據庫
 - 啟動
 
     ``` cmd= 
@@ -470,7 +504,8 @@ app.use(function (req,res){
     - 如果想要修改默認的存儲目錄
 
     ``` cmd=
-    mongod --dbpath-數據儲存目錄路徑
+    mongod --db
+    -數據儲存目錄路徑
     ```
 - 關閉
     ``` cmd=
@@ -487,7 +522,7 @@ app.use(function (req,res){
     ## 該連接狀態輸入 exit 退出連接
     exit
     ```
-### 2. MongoDB 資料庫的基本概念
+### 11.2. MongoDB 資料庫的基本概念
 - 數據庫 - 可以有多個數據庫
     > ex: google,yahoo
 - 集合 - 一個數據庫中可以有多個集合
@@ -689,8 +724,73 @@ User.findOne(
     > 查看顯示所有集合
 - `db.集合名稱.find()`
     > 顯示該集合所有資料
+## 12. 在Express配置使用`express-session`套件
+> [參考文檔](https://github.com/expressjs/session)
+- 安裝
+``` javascript=
+$ npm install express-session
+```
+- 配置
+``` javascript=
+app.use(session({
+    // 配置加密字串，在原有的字串上加上這個字串拼起來去加密
+    // 目的是為了增加安全性，防止客戶端惡意使用
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true     //無論是否有使用，默認給予一把鑰匙
+  }))
+  
+```
+- 使用
+``` javascript=
+//添加 Session
+req.session.foo = 'bar' 
+//獲取 Session
+req.session.foo
+```
+- 提是 默認Session是內存存儲的，服務器一但重啟就會丟失，真正的生產環境會把Session進行持久化存儲。
+## 13. 中間件
+- 當請求進來，會從第一個中間件開始進行匹配，如果匹配，則進來，如果請求進入中間件之後，沒有調用 next 則代碼會停在當前中間件
+- 中間件本身是一個方法，該方法接收三個參數：
+    + Request 請求對象
+    + Response 響應對象
+    + next 下一個中間件
+- 統一處理error message
+    >  當調用 next 的時候，如果傳遞了參數，則直接往後找到帶有 四個參數的應用程序級別中間件
+    + **return next(err)**; 
+``` javascript=
+//router.js
+router.post('/login', (req, res,next) => {
+    var body = req.body;
+    body.password = md5(body.password);
+    console.log(body.password)
+    User.findOne({
+        email: body.email,
+        password: body.password
+    }, (err, data) => {
+        if (err) {
+            return next(err);
+        }
+    })
+})
+//app.js
+app.use((err,req,res,next)=>{
+    res.status(500).json({
+        err_code:500,
+        message:err.message
+    })
+})
+```
 
-## Promise
+
+- 統一處理404頁面
+    > 放在中間件的最後面，如果都沒有呼叫就會呼叫這個404處理頁面
+``` javascript=
+app.use((req,res)=>{
+    res.render('404.html');
+})
+```
+## 14. Promise
 - 回調地獄
 
     > 為了確保非同步方法的執行順序，所以會將方法塞進方法內，這種方式簡稱**回調地獄**
